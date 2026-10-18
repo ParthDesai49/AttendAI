@@ -1,0 +1,63 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Design tokens: ink-navy hero, highlighter-yellow action, one semantic colour per attendance status */
+:root {
+  --paper: #eef1f6; --surface: #ffffff; --sunken: #e5e9f0; --line: #d6dce6;
+  --ink: #0f1b2d; --muted: #566377;
+  --hero: #14213d; --hero-ink: #f4f6fb; --hero-muted: #a5b1cb; --hero-line: #2b3a62;
+  --mark: #ffd23f; --mark-ink: #14213d; --focus: #14213d;
+  --present: #12805a; --late: #b05a00; --absent: #c92f45; --leave: #4254d8; --idle: #667286;
+  color-scheme: light;
+}
+.dark {
+  --paper: #090e1b; --surface: #111a2e; --sunken: #18233d; --line: #25335a;
+  --ink: #eaeff8; --muted: #97a4bd;
+  --hero: #1b2a52; --hero-ink: #f4f6fb; --hero-muted: #aab6d2; --hero-line: #32447a;
+  --mark: #ffd23f; --mark-ink: #14213d; --focus: #ffd23f;
+  --present: #3dd598; --late: #ffb547; --absent: #ff7487; --leave: #9aa7ff; --idle: #8d9ab2;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --font-display: "Bricolage Grotesque Variable", "Figtree Variable", system-ui, sans-serif;
+  --font-sans: "Figtree Variable", system-ui, sans-serif;
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-hero: var(--hero);
+  --color-hero-ink: var(--hero-ink);
+  --color-hero-muted: var(--hero-muted);
+  --color-hero-line: var(--hero-line);
+  --color-mark: var(--mark);
+  --color-mark-ink: var(--mark-ink);
+  --color-present: var(--present);
+  --color-late: var(--late);
+  --color-absent: var(--absent);
+  --color-leave: var(--leave);
+  --color-idle: var(--idle);
+}
+
+@theme {
+  --animate-sheet: sheet-in 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+  @keyframes sheet-in {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: none; opacity: 1; }
+  }
+}
+
+@layer base {
+  html { background: var(--paper); color: var(--ink); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+  body { margin: 0; min-height: 100dvh; }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  ::selection { background: var(--mark); color: var(--mark-ink); }
+  button:not(:disabled) { cursor: pointer; }
+  table { border-collapse: collapse; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
